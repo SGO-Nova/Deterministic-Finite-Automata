@@ -23,20 +23,19 @@ The code syntax includes 4 functions:
 **body:** -> This is where the user will be allowed to enter the transition relation\
   The syntax only allows one relation per line. *ie. Start_Node, transition_alphabet, Next_Node* For a better example, look at the 'code' below.\
 \
-The only syntax order for the funcations is that the nodes() function has to be the first function so it can create the nodes and give them pointers as the other functions do not know what to do with information given if it is not created first.\
+The syntax order for the funcations is that the nodes: function has to be the first function so it can create the nodes and give them pointers as the other functions do not know what to do with information given if it is not created first. Also **The first line must either be blank or the regular expression of the DFA**, because the code prints the first line to the console as a regular expression hint.\
 \
 An example 'code' would be:
 ```
-nodes: //Lists all possible nodes taht can be visited
-q0,q1,q2,q3 
+(a + b)* (ab + ba) (a + b)*
+nodes:
+q0,q1,q2,q3
 
-
-start: //Lists the starting node
+start:
 q0
 
-
-body: //Gives the transition relation for the automata
-q0,a,q1 
+body:
+q0,a,q1
 q0,b,q2
 q1,a,q1
 q1,b,q3
@@ -45,12 +44,35 @@ q2,b,q2
 q3,a,q3
 q3,b,q3
 
-
-end: //Lists the end/final state node
+end:
 q3
 
 ```
 Same automatans can be writen different ways, so it does not matter which order the user gives the transition relation.\
+For example:
+```
+(a + b)* (ab + ba) (a + b)*
+nodes:
+q0,q1,q2,q3
+
+start:
+q0
+
+body:
+q3,b,q3
+q0,b,q2
+q0,a,q1
+q2,b,q2
+q1,a,q1
+q1,b,q3
+q2,a,q3
+q3,a,q3
+
+end:
+q3
+
+```
+This is due the specific mapping to a pointer based on the string given. Everything node given in the nodes: function will have their own pointer and therefore needs to be exactly the same with capitalization.\
 At the end of all functions there must be a blank line between so the different functions can be recognized and not pulled into a different function.\
 
 The name of the file the user must name it is: *DFA.txt*. No other file will be read and an error will occur if trying to run. As long as the name of the file is correct, there is a blank line right after the functions, the node function is the first function, the user only uses stated nodes, the user only uses *'a'* or *'b'* for the alphabet, and there is a starting node, the DFA will work.
