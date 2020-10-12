@@ -105,8 +105,8 @@ The very last line of the body function adds the relation *q1 -> q0 via the lett
 First the code starts by going to the automata() function. This takes in no parameters as there is nothing yet and this was made just to keep organized.
 #### Automata()
 The automata() function looks for the *"DFA.txt"* file and determines if there is a DFA.txt or not. The function then gets the first line to print the regular language that is given. Then the function will loop through the .txt file until it is complete. It will go through looking for the *nodes: start: end:* and *body:* functions to give the approperate attributes and relations based on what the user gave in the DFA.txt file. The function calls the create_Node() function many times to make the nodes for the relations. The program then goes back to the main function and asks for the string the user wants to check. this is then passed into the **calculate()** funciton
-#### create_Node()
-
+#### Create_Node()
+This function will create a node template with the string given as the name, false terminator boolean, and NULL a and b pointers. It also adds this node to an array of points to nodes. This funcation also adds the string/name to a map to keep track of the array index for easier coding on the user side.
 #### Calculate()
 The calculate() function takes in a parameter of a character array so it can interate one character at a time. In a for loop that iterates through all the characters, it checks for the terminator character '\0', aswell as *'a'* and *'b'*. The program moves the current pointer based on whether it sees *'a'* or *'b'*. If it sees anything other than *'a'*, *'b'*, or '\0' then it notifies the user that the string does not recognizes the alphabet used and exits the program. If the function sees the terminator character it checks to see if the current pointer's node's ternimator bollean is true or false. If it is true then the function returns true, if the boolean is false then the function returns false. This boolean is returned to the main function.
 
