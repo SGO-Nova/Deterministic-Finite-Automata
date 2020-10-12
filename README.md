@@ -78,7 +78,7 @@ At the end of all functions there must be a blank line between so the different 
 The name of the file the user must name it is: *DFA.txt*. No other file will be read and an error will occur if trying to run. As long as the name of the file is correct, there is a blank line right after the functions, the node function is the first function, the user only uses stated nodes, the user only uses *'a'* or *'b'* for the alphabet, and there is a starting node, the DFA will work.
 
 ## Transition relation
-The transition relation uses the 5-tuple given or made to make an easy to read relationship between nodes for computers to tell the difference in relations. It is also easy for humans to type out or figure out the transition relation between nodes which makes it easier to input a DFA into the program. The syntax for the transition relation is: *Node_from, alphabet_given, Node_to* In the example above, [this]() DFA was used to figure out the transition relation. Although it is hard to tell in the second example, it is still the same DFA as the first. Users should try to input the relations in a order they seem fit, and keep to that order. This could be a numbering order, or even a left to right sequence. The user should then only type where the node is going and not what nodes lead to it. After finishing the transition relation, the user should double check to make sure their transition relation has no duplicates and all relations are valid.\
+The transition relation uses the 5-tuple given or made to make an easy to read relationship between nodes for computers to tell the difference in relations. It is also easy for humans to type out or figure out the transition relation between nodes which makes it easier to input a DFA into the program. The syntax for the transition relation is: *Node_from, alphabet_given, Node_to* In the example above, [this](https://i.imgur.com/tzQZfIO.png) DFA was used to figure out the transition relation. Although it is hard to tell in the second example, it is still the same DFA as the first. Users should try to input the relations in a order they seem fit, and keep to that order. This could be a numbering order, or even a left to right sequence. The user should then only type where the node is going and not what nodes lead to it. After finishing the transition relation, the user should double check to make sure their transition relation has no duplicates and all relations are valid.\
 If there are duplicate or mulitple alphabets given from the same node, *ie. the letter 'a' goes to two different nodes*, then the last relation given with that alphabet for that node will be used and overwrite the first relation. An example of this would be:
 ```
 a(a + b)*
@@ -102,3 +102,15 @@ q1
 The very last line of the body function adds the relation *q1 -> q0 via the letter 'a'*  which overwites the relation *q1 -> q1 via the letter 'a'* two lines above that. This would mess up the DFA the user was trying to present and give a possible wrong answer.
 
 ## How my code works
+First the code starts by going to the automata() function. This takes in no parameters as there is nothing yet and this was made just to keep organized.
+#### Automata()
+The automata() function looks for the *"DFA.txt"* file and determines if there is a DFA.txt or not. The function then gets the first line to print the regular language that is given. Then the function will loop through the .txt file until it is complete. It will go through looking for the *nodes: start: end:* and *body:* functions to give the approperate attributes and relations based on what the user gave in the DFA.txt file. The function calls the create_Node() function many times to make the nodes for the relations. The program then goes back to the main function and asks for the string the user wants to check. this is then passed into the **calculate()** funciton
+#### create_Node()
+
+#### Calculate()
+The calculate() function takes in a parameter of a character array so it can interate one character at a time. In a for loop that iterates through all the characters, it checks for the terminator character '\0', aswell as *'a'* and *'b'*. The program moves the current pointer based on whether it sees *'a'* or *'b'*. If it sees anything other than *'a'*, *'b'*, or '\0' then it notifies the user that the string does not recognizes the alphabet used and exits the program. If the function sees the terminator character it checks to see if the current pointer's node's ternimator bollean is true or false. If it is true then the function returns true, if the boolean is false then the function returns false. This boolean is returned to the main function.
+
+Back at the main function the program prints whether the string was accepted or not then lets the user exit the program.
+
+## Conclusion
+From this project, I have learned more about how automatas work for DFA and makes me even more eager to try to implement a NFA in the near future. 
