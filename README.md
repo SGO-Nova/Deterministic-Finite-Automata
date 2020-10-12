@@ -51,12 +51,12 @@ q3
 Same automatans can be writen different ways, so it does not matter which order the user gives the transition relation.\
 For example:
 ```
-(a + b)* (ab + ba) (a + b)*
+(a + b)* (ab + ba) (a + b)* String must contain at least one 'a' and one 'b'
 nodes:
 q0,q1,q2,q3
 
-start:
-q0
+end:
+q3
 
 body:
 q3,b,q3
@@ -68,12 +68,37 @@ q1,b,q3
 q2,a,q3
 q3,a,q3
 
-end:
-q3
+start:
+q0
 
 ```
 This is due the specific mapping to a pointer based on the string given. Everything node given in the nodes: function will have their own pointer and therefore needs to be exactly the same with capitalization.\
-At the end of all functions there must be a blank line between so the different functions can be recognized and not pulled into a different function.\
+At the end of all functions there must be a blank line between so the different functions can be recognized and not pulled into a different function.
 
 The name of the file the user must name it is: *DFA.txt*. No other file will be read and an error will occur if trying to run. As long as the name of the file is correct, there is a blank line right after the functions, the node function is the first function, the user only uses stated nodes, the user only uses *'a'* or *'b'* for the alphabet, and there is a starting node, the DFA will work.
-## 
+
+## Transition relation
+The transition relation uses the 5-tuple given or made to make an easy to read relationship between nodes for computers to tell the difference in relations. It is also easy for humans to type out or figure out the transition relation between nodes which makes it easier to input a DFA into the program. The syntax for the transition relation is: *Node_from, alphabet_given, Node_to* In the example above, [this]() DFA was used to figure out the transition relation. Although it is hard to tell in the second example, it is still the same DFA as the first. Users should try to input the relations in a order they seem fit, and keep to that order. This could be a numbering order, or even a left to right sequence. The user should then only type where the node is going and not what nodes lead to it. After finishing the transition relation, the user should double check to make sure their transition relation has no duplicates and all relations are valid.\
+If there are duplicate or mulitple alphabets given from the same node, *ie. the letter 'a' goes to two different nodes*, then the last relation given with that alphabet for that node will be used and overwrite the first relation. An example of this would be:
+```
+a(a + b)*
+nodes:
+q0,q1
+
+start:
+q0
+
+body:
+q0,a,q1
+q0,b,q0
+q1,a,q1
+q1,b,q1
+q1,a,q0
+
+end:
+q1
+
+```
+The very last line of the body function adds the relation *q1 -> q0 via the letter 'a'*  which overwites the relation *q1 -> q1 via the letter 'a'* two lines above that. This would mess up the DFA the user was trying to present and give a possible wrong answer.
+
+## How my code works
